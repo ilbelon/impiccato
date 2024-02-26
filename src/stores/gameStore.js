@@ -14,7 +14,7 @@ export const useGameStore = defineStore('game', () => {
   const maxAttempts = ref(maxAttemptsDefault);
 
   const languages = ref([])
-  languages.value.push('en');
+  languages.value.push('en'); //l'api non ritorna la lingua inglese
   const selectedLanguage = ref('it')
   const playerName = ref('')
   const wordLength = ref(6);
@@ -51,25 +51,6 @@ export const useGameStore = defineStore('game', () => {
     }
   }
 
-  const isGameStarted = computed(() => word.value !== '')
-  const maskedWord = computed(() => {
-    if (!word.value) return ''
-    return word.value
-      .split('')
-      .map((letter) => (guessedLetters.value.includes(letter) ? letter : '_'))
-      .join('')
-  })
-
-  const maskedWordSpaced = computed(() => {
-    if (!word.value) return ''
-    return word.value
-      .split('')
-      .map((letter) => (guessedLetters.value.includes(letter) ? letter+' ' : '_ '))
-      .join('')
-  })
-
-  const remainingLife = computed(() => maxAttempts.value - attempts.value)
-
   function resetGame() {
     word.value = ''
     guessedLetters.value = []
@@ -90,7 +71,27 @@ export const useGameStore = defineStore('game', () => {
     maxAttempts.value = max;
   }
 
-  ;(async function () {
+  const isGameStarted = computed(() => word.value !== '')
+  const maskedWord = computed(() => {
+    if (!word.value) return ''
+    return word.value
+      .split('')
+      .map((letter) => (guessedLetters.value.includes(letter) ? letter : '_'))
+      .join('')
+  })
+
+  const maskedWordSpaced = computed(() => {
+    if (!word.value) return ''
+    return word.value
+      .split('')
+      .map((letter) => (guessedLetters.value.includes(letter) ? letter+' ' : '_ '))
+      .join('')
+  })
+
+  const remainingLife = computed(() => maxAttempts.value - attempts.value);
+  
+  //all'inizio per riempire la lista delle lingue
+  (async function () {
     try {
       let data = await getLanguages();
       languages.value.push(...data);
