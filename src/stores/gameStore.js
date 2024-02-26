@@ -90,8 +90,7 @@ export const useGameStore = defineStore('game', () => {
 
   const remainingLife = computed(() => maxAttempts.value - attempts.value);
   
-  //all'inizio per riempire la lista delle lingue
-  (async function () {
+  async function init() {
     try {
       let data = await getLanguages();
       languages.value.push(...data);
@@ -99,7 +98,18 @@ export const useGameStore = defineStore('game', () => {
     } catch (error) {
       console.error(error)
     }
-  })()
+  }
+
+  //all'inizio per riempire la lista delle lingue
+  /* (async function () {
+    try {
+      let data = await getLanguages();
+      languages.value.push(...data);
+      console.log('languages', languages.value);
+    } catch (error) {
+      console.error(error)
+    }
+  })() */
 
   return {
     isGameStarted,
@@ -120,6 +130,7 @@ export const useGameStore = defineStore('game', () => {
     changeLanguage,
     changeWordLength,
     changemaxAttempts,
-    wordLength
+    wordLength,
+    init
   }
 })

@@ -1,11 +1,10 @@
 <script setup>
 import { useGameStore } from '../stores/gameStore';
-import { ref } from 'vue';
 const store = useGameStore();
-function selectLang() {
-  store.changeLanguage(selection.value);
+function selectLang(e) {
+  console.log(e.target.value);
+  store.changeLanguage(e.target.value);
 }
-const selection = ref('');
 </script>
 <template>
   <div>
@@ -13,7 +12,7 @@ const selection = ref('');
     <div v-if="store.languages.length > 0">
       <li v-for="language in languages" :key="language.id">{{ language.name }}</li>
       <span v-for="language in store.languages" :key="language">
-        <input type="radio" name="" :value="language" @click="selectLang" v-model="selection"/>
+        <input type="radio" name="" :value="language" @change="selectLang"/> 
         <label for="">{{ language }}</label>
       </span>
     </div>

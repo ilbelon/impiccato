@@ -8,6 +8,8 @@ import GameState from './components/GameState.vue'
   </header>
 
   <main>
+     <Suspense >
     <GameState />
+  </Suspense>
   </main>
 </template>

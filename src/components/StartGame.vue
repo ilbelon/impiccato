@@ -7,7 +7,6 @@ const playerName = ref('')
 
 const startGame = () => {
   store.startGame(playerName.value)
-  console.log(`Starting game for player: ${playerName.value}`)
 }
 </script>
 
