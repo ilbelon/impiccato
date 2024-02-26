@@ -5,13 +5,13 @@ async function getRandomWord(lang, length) {
     lang = 'it'
   }
   if (!length) {
-    length = '';
-  }else{
-    length = '&length=' + length;
+    length = ''
+  } else {
+    length = '&length=' + length
   }
   try {
     const url = 'https://random-word-api.herokuapp.com/'
-    const response = await fetch(url + 'word?lang=' + lang+length)
+    const response = await fetch(url + 'word?lang=' + lang + length)
     const data = await response.json()
     return getWord(data)
   } catch (error) {
@@ -28,8 +28,8 @@ async function getLanguages() {
   try {
     const response = await fetch(url + 'languages')
     const data = await response.json()
-    console.log('data', data);
-    return data;
+    console.log('data', data)
+    return data
   } catch (error) {
     console.error('Error retrieving languages:', error)
     return null

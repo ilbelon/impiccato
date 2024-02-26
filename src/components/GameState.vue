@@ -6,8 +6,8 @@ import GameEnd from './GameEnd.vue'
 import LanguageSelection from './LanguageSelection.vue'
 import DifficultSelection from './DifficultSelection.vue'
 
-const store = useGameStore();
-await store.init();
+const store = useGameStore()
+await store.init()
 </script>
 
 <template>
